@@ -18,10 +18,11 @@
 
 
 <div id="img2" style="display:block; position:absolute; top: 0px; left :0px; z-index:0"> <img id="img2" src="bg3.png" alt="Mountain View" style="width:1430px;height:800px;position:absolute;left:80px;top:20px" ></div>
+
 <canvas id="test_medium" width="105" height="105" style="position:absolute;left:484px;top:273px " ></canvas> 
 
 
-  <webaudio-switch id="switch1"  style="position:absolute;left:900px;top:300px "  src="cont/img/switch_toggle.png"  value="0" max="1" width="60" height="60"></webaudio-switch>
+  <webaudio-switch id="switch3"  style="position:absolute;left:900px;top:300px "  src="cont/img/switch_toggle.png"  value="0" max="1" width="60" height="60"></webaudio-switch>
 
  <webaudio-switch id="switch1"  style="position:absolute;left:1000px;top:300px "  src="cont/img/switch_toggle.png"  value="0" max="1" width="60" height="60"></webaudio-switch>
 
@@ -105,7 +106,62 @@
      <webaudio-knob id="knob88" style=" position:absolute;left :320px;  top: 400px; " src="cont/img/cehi.png" value="0" max="2000" step="1" diameter="63" sprites="49"  ></webaudio-knob>
 
 
+<style>
+body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+}
 
+.overlay {
+    height: 30%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 500px;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+.closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 30px !important;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .closebtn {
+    font-size: 40px !important;
+    top: 15px;
+    right: 35px;
+  }
+}
+</style>
 
   <style > 
 .ver{
@@ -396,6 +452,44 @@ document.getElementById("text").innerText = text;
  
 
     </script>
+    <script>
+
+ function da(e) {
+      
+        if(e.target.value=="1") {
+           openNav();
+                }
+             if(e.target.value=="0") {
+              openNav();
+             
+          }
+       
+                    } 
+      var switch3 = document.getElementById('switch3');
+        switch3.addEventListener("change",da,false);
+
+
+
+function openNav() {
+    document.getElementById("myNav").style.width  = "100%";
+}
+
+function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+}
+
+
+
+
+
+</script>
    
+      <div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">close</a>
+  <div class="overlay-content">
+<webaudio-keyboard id="key1"  value="0" direction="" max="1000" step="1" keys="80" width="1350" height="150"
+  style="display:inline-block;border:3px; margin:0px;"  </webaudio-keyboard>
+
+  </div>
   </body>
 </html>
