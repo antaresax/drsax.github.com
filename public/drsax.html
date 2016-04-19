@@ -1,35 +1,180 @@
-
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+nav#nav1{ margin-top: 24px; }
+</style>
+<script>
+var bleep = new Audio();
+bleep.src = "beat1.wav";
+function loadContent(num){
+    bleep.play(); // Play button sound now
+    var div1 = document.getElementById("div1");
+    div1.innerHTML = "Loaded content for section "+num;
+}
+</script>
+</head>
+<body>
+  <nav id="nav1">
+    <button onclick="loadContent(1)">Section 1</button>
+    <button onclick="loadContent(2)">Section 2</button>
+    <button onclick="loadContent(3)">Section 3</button>
+  </nav>
+  <div id="div1">Default content ...</div>
+</body>
+</html>
+-->
 
 <!DOCTYPE html>
 <html>
-
 <head>
-<!--   
-
-2016.4.13  by euyshick, Hong 
-
-- interactive web-music network project "drsax"
-- web adress is "drsax.kr"
-- you can play with your friends on your smart phone or pc, mac, that wherever you can connect your friends realtime !! you can play the music and talk
-
- -->
-
- <!-- knob js file  -->
+<meta charset="UTF-8">
 
 
-    <script src="cont/js/platform.js"></script>
-    <link rel="import" href="cont/webcomponents/polymer.html">
-    <link rel="import" href="cont/webcomponents/controls.html">
-    <meta charset="utf-8">
+<style>
+body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+}
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+.closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px !important;
+}
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .closebtn {
+    font-size: 40px !important;
+    top: 15px;
+    right: 35px;
+  }
+}
+</style>
+<style>
+.dropbtn {
+    background-color: #ffad33;
+    color: white;
+    padding: 40px 6px;
+    font-size: 16px;
+    border: 3px;
+    cursor: pointer;
+  box-shadow: 5px 5px 5px gray;
+     border-radius: 8px;
+}
+.dropbtn:hover, .dropbtn:focus {
+    background-color:radial-gradient(circle, white, gray,black);
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    overflow: auto;
+  box-shadow: 5px 5px 5px gray;
+}
+.dropdown-content a {
+    color: black;
+    padding: 16px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown a:hover {background-color: red;}
+.show {display:block;}
+</style>
 
- <!-- main title  -->
+<style>
+.button1 {
+    position: relative;
+    background-color: black;
+    border: none;
+    font-size: 16px;
+    color: #FFFFFF;
+    padding: 40px 6px;
+    width: 100px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+       border-radius: 8px;
+       box-shadow: 5px 5px 5px gray;
+}
+.button1:after {
+    content: "";
+    background: white;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.6s
+}
+.button1:active:after {
+     background-color:radial-gradient(circle, white, gray,black);
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+.button1:hover {
+    background: radial-gradient(circle, white, black);/* Green */
+  
+}
+.button2:hover {
+    background: radial-gradient(circle, white,  #3399ff);/* Green */
+  
+}
+.button3:hover {
+    background: radial-gradient(circle, white,  #4dff4d);/* Green */
+  
+}
+.button2 {background-color: #3399ff;}
+.button3 {background-color: #4dff4d;}
+.button4 {font-size: 20px;}
+.button5 {font-size: 24px;}
+</style>
 
-    <title>INTERACTIVE WEB-MUSIC NETWORK</title>
 
 </head>
-
- <!-- body start  -->
-
 
 
 <body>
@@ -37,652 +182,178 @@
 
 
 
-<!--  drsax1 canvas visual  -->
+<button class="button1" id="start" onclick="audio.play();" >Play</button>
+<button class="button1" id="playpausebtn">pause</button>
+<button class="button1" id="mutebtn">mute</button>
 
 
-    <style>
-        div#canvas1 > canvas {
-            width: 357px;
-            height: 138px;
-            background: black;
-            float: left;
-        }
-    </style>
+<div id="timebox">
+  <span id="curtimetext">00:00</span> / <span id="durtimetext">00:00</span>
+</div>
 
 
-<!--  main menu  -->
-
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Lato', sans-serif;
-        }
-        
-        .overlay {
-            height: 30%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 600px;
-            left: 0;
-            background-color: rgb(0, 0, 0);
-            background-color: rgba(0, 0, 0, 0.9);
-            overflow-x: hidden;
-            transition: 0.5s;
-        }
-        
-        .overlay-content {
-            position: relative;
-            top: 25%;
-            width: 100%;
-            text-align: center;
-            margin-top: 30px;
-        }
-        
-        .overlay a {
-            padding: 8px;
-            text-decoration: none;
-            font-size: 36px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
-        
-        .overlay a:hover,
-        .overlay a:focus {
-            color: #f1f1f1;
-        }
-        
-        .closebtn {
-            position: absolute;
-            top: 20px;
-            right: 45px;
-            font-size: 30px !important;
-        }
-        
-        @media screen and (max-height: 450px) {
-            .overlay a {
-                font-size: 20px
-            }
-            .closebtn {
-                font-size: 40px !important;
-                top: 15px;
-                right: 35px;
-            }
-        }
-    </style>
+<input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
 
 
-<!--  slider  -->
+    <input type="range" class ="ver" style="display:inline-block; margin:10px;"  value="100" step="1" id ="ver1" min="80" max="150" ></input>
 
-
-
-<!--  main menu  -->
-
-    <style>
-    body {
-            background-color: black;
-        }
-        
-        .ver {
-            position: absolute;
-            top: 80%;
-            transform: rotate(270deg);
-        }
-        
-        .ver {
-            -webkit-appearance: none;
-            margin: 10px;
-            width: 70px;  /*  slide high*/
-        }
-        
-        .ver:focus {
-            outline: none;
-        }
-        
-         .ver::-webkit-slider-runnable-track {
-            width: 7px;
-            height: 3px;
-            border-radius: 3px;
-            cursor: pointer;
-            background: black;
-        }
-        
-        .ver::-webkit-slider-thumb {
-            height: 20px;
-            width: 10px;
-            
-            background: gray;
-            cursor: pointer;
-            -webkit-appearance: none;
-            margin-top: -7.6px;
-            box-shadow: 0 2px black;
-        }
-    }
-    </style>
-
-
-
-<!--  button property -->
-    <style>
-        .button {
-            display: inline-block;
-            padding: 10px 17px;
-            font-size: 24px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            outline: none;
-            color: white;
-            background-color: black;
-            border: none;
-            border-radius: 4px;
-            box-shadow: 0 1px black;
-        }
-        
-        .button:hover {
-            background-color: gray;
-        }
-        
-        .button:active {
-            background-color: #484848;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-    </style>
-
-
-<!--  main background image  -->
-
-
-    <img id="img2" src="newbg.png" style="width:1600px;height:900px;position:absolute;left:0px;top:0px">
-
-
-
-<!--  drsax1 canvas visual  -->
-
-    <div id="canvas1">
-
-        <canvas id="analyser1" style="position:absolute;left:22px;top:364px"></canvas>
-    </div>
-
-
-<!--  main menu  -->
-
-
-    <webaudio-switch id="switch3" style="position:absolute;left:900px;top:50px " src="cont/img/button.png" value="0" height="80" width="80"></webaudio-switch>
-    <webaudio-switch id="switch3" style="position:absolute;left:1000px;top:50px " src="cont/img/button.png" value="0" height="80" width="80"></webaudio-switch>
-    <webaudio-switch id="switch3" style="position:absolute;left:1100px;top:50px " src="cont/img/button.png" value="0" height="80" width="80"></webaudio-switch>
-
-
-
-<!-- silver steal on/off switch -->
-
-
-    <webaudio-switch id="switch3" style="position:absolute;left:440px;top:100px " src="cont/img/switch_toggle.png" value="0" max="1" width="60" height="60"></webaudio-switch>
-
-    <webaudio-switch id="switch1" style="position:absolute;left:520px;top:100px " src="cont/img/switch_toggle.png" value="0" max="1" width="60" height="60"></webaudio-switch>
-
-    <webaudio-switch id="switch1" style="position:absolute;left:600px;top:100px " src="cont/img/switch_toggle.png" value="0" max="1" width="60" height="60"></webaudio-switch>
-
-
-
-<!-- circle steal on/off switch -->
-
-    <webaudio-switch id="switch3" style="position:absolute;left:950px;top:120px " src="cont/img/swt.png" value="0" height="40" width="40"></webaudio-switch>
-    <webaudio-switch id="switch3" style="position:absolute;left:1050px;top:120px " src="cont/img/swt.png" value="0" height="40" width="40"></webaudio-switch>
-    <webaudio-switch id="switch3" style="position:absolute;left:1150px;top:120px " src="cont/img/swt.png" value="0" height="40" width="40"></webaudio-switch>
-   
-
-
-
-<!-- blue led on/off switch -->
-
-    <webaudio-switch id="switch3" style="position:absolute;left:20px;top:310px " src="cont/img/blue.png" value="1" height="50" width="50"></webaudio-switch>
-    <webaudio-switch id="switch3" style="position:absolute;left:420px;top:310px " src="cont/img/blue.png" value="1" height="50" width="50"></webaudio-switch>
-    <webaudio-switch id="switch3" style="position:absolute;left:820px;top:310px " src="cont/img/blue.png" value="1" height="50" width="50"></webaudio-switch>
-    <webaudio-switch id="switch3" style="position:absolute;left:1230px;top:310px " src="cont/img/blue.png" value="1" height="50" width="50"></webaudio-switch>
-
-
-
-
-<!-- red on/off switch position is  bottom -->
-
-    <webaudio-switch id="switch3" style="position:absolute;left:1250px;top:150px " src="cont/img/onoff.png" value="0" height="80" width="80"></webaudio-switch>
-    <webaudio-switch id="switch3" style="position:absolute;left:1320px;top:150px " src="cont/img/onoff.png" value="0" height="80" width="80"></webaudio-switch>
-
-
-
-<!-- knob dial with handle -->
-
-    <webaudio-knob id="knob1" style="position:absolute;left:700px;top:100px " src="cont/img/kblack.png" value="0" max="10" step="1" diameter="70" sprites="9"></webaudio-knob>
-    <webaudio-knob id="knob1" style="position:absolute;left:780px;top:100px " src="cont/img/kblack.png" value="0" max="10" step="1" diameter="70" sprites="9"></webaudio-knob>
+<select id="mylist" size="0">
+  <option value="beat3.wav"></option>
+  <option value="beat2.wav"></option>
  
 
+</select><br><br>
+
+
+
+<button class="button1 button2" id="clic" >Hihat dr</button>
+<button class="button1 button2" id="clic" >snare dr</button>
+<button class="button1 button3" id="clic" >crash dr</button> <br><br>
+
+<button class="button1 button2" id="clic" >Hihat dr</button>
+<button class="button1 button2" id="clic" >snare dr</button>
+<button class="button1 button3" id="clic" >crash dr</button>
 
 
 
 
 
+<div class="dropdown">
+<button onclick="myFunction()" class="dropbtn">Drum preset</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a onclick="a();" >beat1</a>
+    <a onclick="b();">beat2</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div>
+<p id="demo">Click me.</p>
 
 
 
 
 
-<!-- yellow dial  -->
-
-
-    <webaudio-knob id="knob1" style="position:absolute;left:1400px;top:110px" style="top:30px" src="cont/img/knoo.png" value="0" max="2000" step="1" diameter="140" sprites="30"></webaudio-knob>
-
-
-    </div>
-
-    <h1 id="text" style="position:absolute;left:500px;top:210px"> Interactive Web-Music
-    </h1>
-
-
-
-<!-- tlak box  -->
-    <button class="button" style="position:absolute;left:400px;top:225px" onclick="text();">Talk</button>
-
-<!-- slider  -->
-
-
-    <input type="range" class="ver" style="position:absolute;left:100px;top:235px" id="ver" name="points" value="0" step="0.1" min="0" max="100">
-
-  <input type="range" class="ver" style="position:absolute;left:175px;top:235px" id="ver1" name="points" value="0" step="0.1" min="0" max="100">
-
-    <input type="range" class="ver" style="position:absolute;left:250px;top:235px" id="ver2" name="points" value="0" step="0.1" min="0" max="100">
-
-
-
-<!-- slider innerhtml  -->
-
-
-    <p id="knob" style="position:absolute;left:100px;top:200px">Value</p>
-    <p id="kno" style="position:absolute;left:200px;top:200px">Value</p>
-    <p id="knob2" style="position:absolute;left:300px;top:200px">Value</p>
-    <h1 id="player" style="position:absolute;left:990px;top:215px"></h1>
-
-<!-- red dial  -->
-
-
-    <webaudio-knob id="knob1" src="cont/img/red.png" style="position:absolute;left:120px;top:60px " value="0" max="2000" step="1" diameter="90" sprites="30"></webaudio-knob>
-    <webaudio-knob id="knob1" src="cont/img/red.png" style="position:absolute;left:220px;top:60px " value="0" max="2000" step="1" diameter="90" sprites="30"></webaudio-knob>
-    <webaudio-knob id="knob1" src="cont/img/red.png" style="position:absolute;left:320px;top:60px " value="0" max="2000" step="1" diameter="90" sprites="30"></webaudio-knob>
+    <div id="div1">Default content ...</div>
 
 
 
 
 
-   
+          <div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Open</a>
+  <div class="overlay-content">
+    <a href="#">Beat Box</a>
+    <a href="#">Feel free to enjoy</a>
 
-<!-- visual canvas dial  -->
-
-
-    <webaudio-knob id="knob1" style=" position:absolute;left :121px;  top: 527px; " src="cont/img/dde.png" value="0" max="2000" step="1" diameter="70" sprites="30"></webaudio-knob>
-    <webaudio-knob id="knob1" style=" position:absolute;left :206px;  top: 527px; " src="cont/img/dde.png" value="0" max="2000" step="1" diameter="70" sprites="30"></webaudio-knob>
-
-
-    <webaudio-knob id="knob1" style=" position:absolute;left :527px;  top: 527px; " src="cont/img/dde.png" value="0" max="2000" step="1" diameter="70" sprites="30"></webaudio-knob>
-    <webaudio-knob id="knob1" style=" position:absolute;left :610px;  top: 527px; " src="cont/img/dde.png" value="0" max="2000" step="1" diameter="70" sprites="30"></webaudio-knob>
-
-
-
-
-    <webaudio-knob id="knob1" style=" position:absolute;left :927px;  top: 527px; " src="cont/img/dde.png" value="0" max="2000" step="1" diameter="70" sprites="30"></webaudio-knob>
-    <webaudio-knob id="knob1" style=" position:absolute;left :1006px;  top: 527px; " src="cont/img/dde.png" value="0" max="2000" step="1" diameter="70" sprites="30"></webaudio-knob>
-
-
-
-
-
-    <webaudio-knob id="knob1" style=" position:absolute;left :1325px;  top: 527px; " src="cont/img/dde.png" value="0" max="2000" step="1" diameter="70" sprites="30"></webaudio-knob>
-    <webaudio-knob id="knob1" style=" position:absolute;left :1405px;  top: 527px; " src="cont/img/dde.png" value="0" max="2000" step="1" diameter="70" sprites="30"></webaudio-knob>
-
-
-
-
-
-  
+  </div>
 </body>
-
-
-
 <script>
-    var canvas, ctx, context, analyser, fbc_array, bars, bar_x, bar_width, bar_height;
-    // Initialize the MP3 player after the page loads all of its HTML into the windo
-    window.addEventListener("load", sinesound, false);
-
-    function sinesound() {
-        context = new AudioContext(); // AudioContext object instance
-        analyser = context.createAnalyser(); // AnalyserNode method
-        canvas = document.getElementById('analyser1');
-        ctx = canvas.getContext('2d');
-        osc = context.createOscillator();
-        gain = context.createGain();
-
-        gain.gain.value = 0.01;
-        osc.type = 'sawtooth';
-        osc.frequency.value = 315;
-
-
-        osc.connect(gain);
-        gain.connect(analyser);
-        analyser.connect(context.destination);
-
-        osc.start(0);
-        frameLooper();
+var audio, playbtn, mutebtn, seekslider, volumeslider, curtimetext, durtimetext, speedlist, a;
+function initAudioPlayer(){
+    audio = new Audio();
+    audio.src = "beat3.wav";
+    audio.loop = true;
+     audio.playbackRate = 0.9;
+ 
+var mylist = document.getElementById("mylist");
+    mylist.addEventListener("change", changeTrack);
+    // Functions
+    function changeTrack(event){
+        audio.src = event.target.value
+        audio.play();
+ 
     }
-    // frameLooper() animates any style of graphics you wish to the audio frequency
-    // Looping at the default frame rate that the browser provides(approx. 60 FPS)
-    function frameLooper() {
-        window.webkitRequestAnimationFrame(frameLooper);
-        fbc_array = new Uint8Array(analyser.frequencyBinCount);
-        analyser.getByteFrequencyData(fbc_array);
-        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-        ctx.fillStyle = '#50b4ff'; // Color of the bars
-        bars = 200;
-        for (var i = 0; i < bars; i++) {
-            bar_x = i * 3;
-            bar_width = 2;
-            bar_height = -(fbc_array[i] / 2);
-            //  fillRect( x, y, width, height ) // Explanation of the parameters below
-            ctx.fillRect(bar_x, canvas.height, bar_width, bar_height);
-        }
+var speedlist = document.getElementById("ver1");
+    speedlist.addEventListener("change",changeSpeed, false);
+    function changeSpeed(eve){
+       
+         var str= 0;
+  str= eve.target.value 
+          audio.playbackRate = str/100;
+           div1.innerHTML =        audio.playbackRate;
     }
-</script>
-
-<script>
-    var startButton = document.querySelector('.start'),
-        stopButton = document.querySelector('.stop'),
-        freqSlider = document.querySelector(".freq-slider"),
-        detuneSlider = document.querySelector('.detune-slider'),
-        gainSlider = document.querySelector('.gain-slider'),
-
-        freqDisplay = document.querySelector('.freq'),
-        freqDisplay1 = document.querySelector('.freq1');
-    // load our default value
-    init();
-    // setup start/stop
-    startButton.onclick = start;
-    stopButton.onclick = stop;
-    // setup waveform chan
-    function init() {
-        audioContext = new(window.AudioContext)();
-        amp = audioContext.createGain();
-        lowpass = audioContext.createBiquadFilter();
-        osc = audioContext.createOscillator();
-        osc.type = 'sawtooth';
-        osc.frequency.value = 315;
-        lowpass.frequency.value = 200;
-
-        osc.connect(lowpass);
-        lowpass.connect(amp);
-        osc.start(0);
-
-        function ddd(e) {
-
-            if (e.target.value == "1") {
-                amp.connect(audioContext.destination);
-            }
-            if (e.target.value == "0") {
-                amp.disconnect(audioContext.destination);
-            }
-
-        }
-        var switch3 = document.getElementById('switch3');
-        switch3.addEventListener("change", ddd, false);
-
-        function sin(e) {
-
-            if (e.target.value == "0") {
-                osc.type = 'sine';
-            }
-            if (e.target.value == "1") {
-
-
-            }
-        }
-        var switch4 = document.getElementById('switch4');
-        switch4.addEventListener("change", sin, false);
-        freqSlider.oninput = function() {
-                changeFreq(freqSlider.value);
-            }
-            // change frequency
-        function changeFreq(fff) {
-            osc.frequency.value = fff;
-            freqDisplay1.innerHTML = fff + 'Hz';
-        }
-
-        function changeFreq(ff) {
-            osc.frequency.value = ff;
-            freqDisplay.innerHTML = ff + 'Hz';
-        }
-    }
-</script>
-
-
-
-
-<script>
-    var knob1 = document.getElementById('knob1');
-    knob1.addEventListener("change", knob, false);
-    var slide2 = document.getElementById('slide2');
-    slide2.addEventListener("change", knob, false);
-
-    function knob(data) {
-        var str = 0;
-        str = data.target.value
-        lowpass.frequency.value = str;
-    }
-
-    var knob2 = document.getElementById('knob2');
-    knob2.addEventListener("change", knob22, false);
-    var slide3 = document.getElementById('slide3');
-    slide3.addEventListener("change", knob22, false);
-
-    function knob22(data) {
-        var str = 0;
-        str = data.target.value
-        lowpass.Q.value = str;
-    }
-    var knob3 = document.getElementById('knob3');
-    knob3.addEventListener("change", knob33, false);
-    var slide4 = document.getElementById('slide4');
-    slide4.addEventListener("change", knob33, false);
-
-    function knob33(data) {
-        var str = 0;
-        str = data.target.value
-        amp.gain.value = str;
-    }
-    var knob4 = document.getElementById('knob4');
-    knob4.addEventListener("change", knob44, false);
-    var slide1 = document.getElementById('slide1');
-    slide1.addEventListener("change", knob44, false);
-
-    function knob44(data) {
-        var str = 0;
-        str = data.target.value
-        osc.frequency.value = str;
-    }
-    var key1 = document.getElementById("key1");
-    key1.addEventListener('change', key11, false);
-    key1.addEventListener('note', key11, false);
-
-    function key11(data) {
-        var str = 0;
-        str = 880 * 4 * Math.pow(2, (data.note[1] - 69) / 12);
-        osc.frequency.value = str;
-        freqDisplay1.innerHTML = str.toFixed(0) + 'Hz'
-        if (data.note[0] == "1") {
-            amp.gain.value = 0.7;
-
-        }
-        if (data.note[0] == "0") {
-            amp.gain.value = 0;
-        }
-
-    }
-</script>
-
-
-
-
-
-<script src="/socket.io/socket.io.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.js"></script>
-
-<script>
-    var socket = io();
-
-    var knob = document.getElementById('ver');
-    knob.addEventListener("change", knob0, false);
-
-    function knob0(data) {
-
-        var str = data.target.value
-
-        socket.emit('1', str);
-    }
-
-    socket.on('1', function(str) {
-        document.getElementById('knob').innerHTML = str;
-        document.getElementById('ver').value = str;
-    });
-
-
-
-
-    var kno = document.getElementById('ver1');
-    kno.addEventListener("change", kno1, false);
-
-    function kno1(data) {
-
-        var str = data.target.value
-
-        socket.emit('2', str);
-    }
-
-    socket.on('2', function(str) {
-        document.getElementById('kno').innerHTML = str;
-        document.getElementById('ver1').value = str;
-    });
-
-
-
-
-
-    var knob2 = document.getElementById('ver2');
-    knob2.addEventListener("change", knob22, false);
-
-    function knob22(data) {
-
-        var str = data.target.value
-
-        socket.emit('3', str);
-    }
-
-    socket.on('3', function(str) {
-        document.getElementById('knob2').innerHTML = str;
-        document.getElementById('ver2').value = str;
-    });
-
-
-
-    /////////////////////////////////////////////////////////////////////////////
-
-    function text() {
-
-        var text;
-
-        text = prompt(" hi Dr.Hong ");
-
-
-        socket.emit('10', text);
-
-    }
-
-
-    socket.on('10', function(text) {
-        document.getElementById("text").innerText = text;
-
-
-
-    });
-    ///////////////////////////////////////////////
-    //socket.on('id',function(id){ 
-
-    //document.getElementById("aaa").innerText =;
-
-    //});
-
-    socket.on('change name', function(name) {
-
-        document.getElementById("player").innerText = " " + name + " " + "players";
-
-    });
-    socket.on('change name', function(minus) {
-
-        document.getElementById("player").innerText = " " + minus + " " + "players";
-
-    });
-
-    ///////////////////////////////////////////////////////////////////////////////
-    function see() {
-
-        socket.emit('user', 'data');
-    }
-
-    socket.on('user', function() {
-        document.getElementById('name').innerHTML = "see";
-
-    });
-
-
-    function hello() {
-
-        socket.emit('star', 'data');
-    }
-
-    socket.on('star', function() {
-        document.getElementById('name').innerHTML = "hide";
-
-    });
-</script>
-<script>
-    function da(e) {
-
-        if (e.target.value == "1") {
-            openNav();
-        }
-        if (e.target.value == "0") {
-            openNav();
-
-        }
-
-    }
-    var switch3 = document.getElementById('switch3');
-    switch3.addEventListener("change", da, false);
-
-
-
-    function openNav() {
-        document.getElementById("myNav").style.width = "100%";
-    }
-
-    function closeNav() {
-        document.getElementById("myNav").style.width = "0%";
-    }
-</script>
-
-<div id="myNav" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">close</a>
-    <div class="overlay-content">
-        <webaudio-keyboard id="key1" value="0" direction="" max="1000" step="1" keys="80" width="1350" height="150" style="display:inline-block;border:3px; margin:0px;" </webaudio-keyboard>
-
-    </div>
+    // Set object references
+    playbtn = document.getElementById("playpausebtn");
+    mutebtn = document.getElementById("mutebtn");
+   
+    volumeslider = document.getElementById("volumeslider");
+    curtimetext = document.getElementById("curtimetext");
+    durtimetext = document.getElementById("durtimetext");
+    // Add Event Handling
+    playbtn.addEventListener("click",playPause);
+    mutebtn.addEventListener("click", mute);
+    volumeslider.addEventListener("change",setvolume);
     
+    // Functions
+    function playPause(){
+        if(audio.paused){
+            audio.play();
+            //playbtn.style.background = "url(images/pause.png) no-repeat";
+        } else {
+            audio.pause();
+           // playbtn.style.background = "url(images/play.png) no-repeat";
+        }
+    var div1 = document.getElementById("div1");
+    div1.innerHTML = "Loaded content for section "
+    }
+    function mute(){
+        if(audio.muted){
+            audio.muted = false;
+            //mutebtn.style.background = "url(images/speaker.png) no-repeat";
+        } else {
+            audio.muted = true;
+           // mutebtn.style.background = "url(images/speaker_muted.png) no-repeat";
+        }
+    }
+    function setvolume(){
+        audio.volume = volumeslider.value / 200;
+    }
+}
+function myFunctio() {
+    document.getElementById("clic").click();
+}
+function a(){
+  audio.src = "beat3.wav";
+  div1.innerHTML = "changed preset beat3 "
+}
+function b(){
+  audio.src ="beat2.wav" ;
+ div1.innerHTML = "changed preset beat2 "
+}
+window.addEventListener("load", initAudioPlayer);
+////////////////////////////////////////
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+ 
+</script>
+<script>
+window.onload = function(){ 
+   openNav();
+  //openCity(event, 'London');
+  
+    // obj.value = "날코천재"; 
+}
+function openNav() {
+    document.getElementById("myNav").style.width = "100%";
+}
+function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+}
+</script>
 
 </html>
