@@ -62,7 +62,7 @@
             width: 0;
             position: fixed;
             z-index: 1;
-            top: 600px;
+            top: 100px;
             left: 0;
             background-color: rgb(0, 0, 0);
             background-color: rgba(0, 0, 0, 0.9);
@@ -190,19 +190,17 @@
         }
     </style>
 
-    <style>
+   <style>
 .dropbtn {
     background-color: #ffad33;
     color: white;
-    padding: 40px 6px;
-    font-size: 16px;
+    position:absolute;left:290px;top:530px;
+    padding: 1px 30px;
+    font-size: 10px;
     border: 3px;
     cursor: pointer;
   box-shadow: 5px 5px 5px gray;
      border-radius: 8px;
-
-
-     
 }
 .dropbtn:hover, .dropbtn:focus {
     background-color:radial-gradient(circle, white, gray,black);
@@ -213,20 +211,74 @@
 }
 .dropdown-content {
     display: none;
-    position: absolute;
+    position:absolute;left:290px;top:200px;
     background-color: white;
-    min-width: 160px;
+    min-width: 70px;
     overflow: auto;
   box-shadow: 5px 5px 5px gray;
 }
 .dropdown-content a {
     color: black;
-    padding: 16px 16px;
+    padding: 14px 14px;
     text-decoration: none;
     display: block;
 }
-.dropdown a:hover {background-color: red;}
+.dropdown a:hover {background-color: gray;}
 .show {display:block;}
+</style>
+<style>
+.button1 {
+    position: relative;
+    background-color: black;
+    border: none;
+    font-size: 16px;
+    color: #FFFFFF;
+    padding: 25px 10px;
+    width: 70px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+       border-radius: 8px;
+       box-shadow: 5px 5px 5px gray;
+}
+.button1:after {
+    content: "";
+    background: white;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.6s
+}
+.button1:active:after {
+     background-color:radial-gradient(circle, white, gray,black);
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+.button1:hover {
+    background: radial-gradient(circle, white, black);/* Green */
+  
+}
+.button2:hover {
+    background: radial-gradient(circle, white,  #3399ff);/* Green */
+  
+}
+.button3:hover {
+    background: radial-gradient(circle, white,  #4dff4d);/* Green */
+  
+}
+.button2 {background-color: #3399ff;}
+.button3 {background-color: #4dff4d;}
+.button4 {font-size: 20px;}
+.button5 {font-size: 24px;}
 </style>
 
 
@@ -247,65 +299,82 @@
 
 <!--  main menu  -->
 
-<button class="button1"  style="position:absolute;left:100px;top:664px"id="start" onclick="audio.play();" >Play</button>
-
-<button class="button1"  style="position:absolute;left:200px;top:664px"id="mute">mute</button>
+<button class="button1"  style="position:absolute;left:120px;top:64px"id="start" onclick="audio.play();" >Play</button>
 
 
-<button class="buttojn" style="position:absolute;left:350px;top:624px" id= "p" >pause</button>
+<button class="button1" style="position:absolute;left:220px;top:64px" id= "p" >Pause</button>
 
-
+<button class="button1"  style="position:absolute;left:320px;top:64px"id="mute">Mute</button>
 
 
 
-    <webaudio-switch id="switch3" style="position:absolute;left:900px;top:50px " src="cont/img/button.png" value="0" height="80" width="80"></webaudio-switch>
-    <webaudio-switch id="switch3" style="position:absolute;left:1000px;top:50px " src="cont/img/button.png" value="0" height="80" width="80"></webaudio-switch>
-    <webaudio-switch id="switch3" style="position:absolute;left:1100px;top:50px " src="cont/img/button.png" value="0" height="80" width="80"></webaudio-switch>
 
 
 
-<!-- silver steal on/off switch -->
 
 
-    <webaudio-switch id="switch3" style="position:absolute;left:440px;top:100px " src="cont/img/switch_toggle.png" value="0" max="1" width="60" height="60"></webaudio-switch>
-
-    <webaudio-switch id="switch1" style="position:absolute;left:520px;top:100px " src="cont/img/switch_toggle.png" value="0" max="1" width="60" height="60"></webaudio-switch>
-
-    <webaudio-switch id="switch1" style="position:absolute;left:600px;top:100px " src="cont/img/switch_toggle.png" value="0" max="1" width="60" height="60"></webaudio-switch>
+<!--  on/off switch -->
 
 
+    <webaudio-switch id="switch1" style="position:absolute;left:440px;top:85px " src="cont/img/switch_toggle.png" value="0" max="1" width="60" height="60"></webaudio-switch>
 
-<!-- circle steal on/off switch -->
+    <webaudio-switch id="switch2" style="position:absolute;left:520px;top:85px " src="cont/img/switch_toggle.png" value="0" max="1" width="60" height="60"></webaudio-switch>
 
-    <webaudio-switch id="switch3" style="position:absolute;left:950px;top:120px " src="cont/img/swt.png" value="0" height="40" width="40"></webaudio-switch>
-    <webaudio-switch id="switch3" style="position:absolute;left:1050px;top:120px " src="cont/img/swt.png" value="0" height="40" width="40"></webaudio-switch>
-    <webaudio-switch id="switch3" style="position:absolute;left:1150px;top:120px " src="cont/img/swt.png" value="0" height="40" width="40"></webaudio-switch>
+    <webaudio-switch id="switch3" style="position:absolute;left:600px;top:85px " src="cont/img/switch_toggle.png" value="0" max="1" width="60" height="60"></webaudio-switch>
+
+
+
+<!--  silver steal  on/off switch -->
+
+
+
+    <webaudio-switch id="switch4" style="position:absolute;left:900px;top:20px " src="cont/img/button.png" value="0" height="80" width="80"></webaudio-switch>
+    <webaudio-switch id="switch5" style="position:absolute;left:1000px;top:20px " src="cont/img/button.png" value="0" height="80" width="80"></webaudio-switch>
+    <webaudio-switch id="switch6" style="position:absolute;left:1100px;top:20px " src="cont/img/button.png" value="0" height="80" width="80"></webaudio-switch>
+
+
+
+
+
+<!-- mini circle  on/off switch -->
+
+    <webaudio-switch id="switch7" style="position:absolute;left:950px;top:120px " src="cont/img/swt.png" value="0" height="40" width="40"></webaudio-switch>
+    <webaudio-switch id="switch8" style="position:absolute;left:1050px;top:120px " src="cont/img/swt.png" value="0" height="40" width="40"></webaudio-switch>
+    <webaudio-switch id="switch9" style="position:absolute;left:1150px;top:120px " src="cont/img/swt.png" value="0" height="40" width="40"></webaudio-switch>
    
 
 
 
 <!-- blue led on/off switch -->
 
-    <webaudio-switch id="switch3" style="position:absolute;left:20px;top:310px " src="cont/img/blue.png" value="1" height="50" width="50"></webaudio-switch>
-    <webaudio-switch id="switch3" style="position:absolute;left:420px;top:310px " src="cont/img/blue.png" value="1" height="50" width="50"></webaudio-switch>
-    <webaudio-switch id="switch3" style="position:absolute;left:820px;top:310px " src="cont/img/blue.png" value="1" height="50" width="50"></webaudio-switch>
-    <webaudio-switch id="switch3" style="position:absolute;left:1230px;top:310px " src="cont/img/blue.png" value="1" height="50" width="50"></webaudio-switch>
+    <webaudio-switch id="switch10" style="position:absolute;left:20px;top:310px " src="cont/img/blue.png" value="1" height="50" width="50"></webaudio-switch>
+    <webaudio-switch id="switch11" style="position:absolute;left:420px;top:310px " src="cont/img/blue.png" value="1" height="50" width="50"></webaudio-switch>
+    <webaudio-switch id="switch12" style="position:absolute;left:820px;top:310px " src="cont/img/blue.png" value="1" height="50" width="50"></webaudio-switch>
+    <webaudio-switch id="switch13" style="position:absolute;left:1230px;top:310px " src="cont/img/blue.png" value="1" height="50" width="50"></webaudio-switch>
 
 
 
 
 <!-- red on/off switch position is  bottom -->
 
-    <webaudio-switch id="switch3" style="position:absolute;left:1250px;top:150px " src="cont/img/onoff.png" value="0" height="80" width="80"></webaudio-switch>
-    <webaudio-switch id="switch3" style="position:absolute;left:1320px;top:150px " src="cont/img/onoff.png" value="0" height="80" width="80"></webaudio-switch>
+    <webaudio-switch id="switch_standby" style="position:absolute;left:1250px;top:150px " src="cont/img/onoff.png" value="0" height="80" width="80"></webaudio-switch>
+    <webaudio-switch id="switch_on" style="position:absolute;left:1320px;top:150px " src="cont/img/onoff.png" value="0" height="80" width="80"></webaudio-switch>
 
 
 
 <!-- knob dial with handle -->
 
-    <webaudio-knob id="knob1" style="position:absolute;left:700px;top:100px " src="cont/img/kblack.png" value="0" max="10" step="1" diameter="70" sprites="9"></webaudio-knob>
-    <webaudio-knob id="knob1" style="position:absolute;left:780px;top:100px " src="cont/img/kblack.png" value="0" max="10" step="1" diameter="70" sprites="9"></webaudio-knob>
+    <webaudio-knob id="dial1" style="position:absolute;left:470px;top:130px " src="cont/img/kblack.png" value="0" max="2000" step="1" diameter="70" sprites="9"></webaudio-knob>
+    <webaudio-knob id="dial2" style="position:absolute;left:560px;top:130px " src="cont/img/kblack.png" value="0" max="20" step="0.1" diameter="70" sprites="9"></webaudio-knob>
  
+
+<!-- red dial  -->
+
+
+    <webaudio-knob id="dial3" src="cont/img/red.png" style="position:absolute;left:690px;top:100px " value="0" max="2000" step="1" diameter="90" sprites="30"></webaudio-knob>
+    <webaudio-knob id="dial4" src="cont/img/red.png" style="position:absolute;left:800px;top:100px " value="0" max="1" step="0.1" diameter="90" sprites="30"></webaudio-knob>
+
+
 
 
 
@@ -355,16 +424,6 @@
     <p id="knob2" style="position:absolute;left:300px;top:200px">Value</p>
     <h1 id="player" style="position:absolute;left:990px;top:215px"></h1>
 
-<!-- red dial  -->
-
-
-    <webaudio-knob id="knob1" src="cont/img/red.png" style="position:absolute;left:120px;top:60px " value="0" max="2000" step="1" diameter="90" sprites="30"></webaudio-knob>
-    <webaudio-knob id="knob1" src="cont/img/red.png" style="position:absolute;left:220px;top:60px " value="0" max="2000" step="1" diameter="90" sprites="30"></webaudio-knob>
-    <webaudio-knob id="knob1" src="cont/img/red.png" style="position:absolute;left:320px;top:60px " value="0" max="2000" step="1" diameter="90" sprites="30"></webaudio-knob>
-
-
-
-
 
    
 
@@ -372,7 +431,7 @@
 
 
     <webaudio-knob id="vis-knob1" style=" position:absolute;left :121px;  top: 527px; " src="cont/img/dde.png" value="100" min="80" max="150" step="1" diameter="70" sprites="30"></webaudio-knob>
-    <webaudio-knob id="vis-knob2" style=" position:absolute;left :206px;  top: 527px; " src="cont/img/dde.png" value="7" min="0"  max="100" step="1" diameter="70" sprites="30"></webaudio-knob>
+    <webaudio-knob id="vis-knob2" style=" position:absolute;left :206px;  top: 527px; " src="cont/img/dde.png" value="100" min="0"  max="100" step="1" diameter="70" sprites="30"></webaudio-knob>
 
 <!--  canvas dial  2 -->
 
@@ -392,10 +451,8 @@
 
     <webaudio-knob id="knob1" style=" position:absolute;left :1325px;  top: 527px; " src="cont/img/dde.png" value="0" max="2000" step="1" diameter="70" sprites="30"></webaudio-knob>
     <webaudio-knob id="knob1" style=" position:absolute;left :1405px;  top: 527px; " src="cont/img/dde.png" value="0" max="2000" step="1" diameter="70" sprites="30"></webaudio-knob>
-
-
+      
 <!-- canvas2   -->
-
 
 
 
@@ -408,11 +465,16 @@
   <div id="myDropdown" class="dropdown-content">
     <a onclick="a();" >beat1</a>
     <a onclick="b();">beat2</a>
-    <a href="#contact">Contact</a>
+    <a > no</a>
   </div>
 </div>
 
 
+<div id="div1" style=" position:absolute;left :290px; top: 580px;">Preset</div>
+
+
+
+<webaudio-keyboard id="keyboard" value="0" direction="" max="1000" step="1" keys="80" width="1350" height="150" style=" position:absolute;left:125px;top:627px; "> </webaudio-keyboard>
 
   
 </body>
@@ -420,16 +482,30 @@
 
  
 <script>
+
+
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+
+
 var audio,source, playpause, volumeslider, a, canvas, ctx, context, analyser, fbc_array, bars, bar_x, bar_width, bar_height;
 
 window.addEventListener("load", initAudioPlayer, false);
 
 function initAudioPlayer(){
-
-
-
-
-
 
         context = new AudioContext(); // AudioContext object instance
         analyser = context.createAnalyser(); // AnalyserNode method
@@ -437,29 +513,27 @@ function initAudioPlayer(){
         ctx = canvas.getContext('2d');
         osc = context.createOscillator();
         gain = context.createGain();
-
+//////////////////
         gain.gain.value = 0.5;
         osc.type = 'sawtooth';
         osc.frequency.value = 315;
-
-
-
-      osc.start(0);
-
-  audio = new Audio();
-    audio.src = "beat3.wav";
-    audio.loop = true;
-     audio.playbackRate = 0.6;
+        osc.start(0);
+////////////////////
+        audio = new Audio();
+        audio.src = "beat3.wav";
+        audio.loop = true;
+        audio.playbackRate = 0.9;
+     
 
 
 
 
-source = context.createMediaElementSource(audio); 
+    source = context.createMediaElementSource(audio); 
     source.connect(analyser);
     analyser.connect(context.destination);
   
 
-frameLooper();
+    frameLooper();
 
  
 var mylist = document.getElementById("mylist");
@@ -471,16 +545,9 @@ var mylist = document.getElementById("mylist");
  
     }
 
- 
- 
-
-  
-
-
-
 }
 
-  
+  ////////////////////mute, pause //////
     mutebtn = document.getElementById("mute");
     mutebtn.addEventListener("click", mute);
     
@@ -512,45 +579,31 @@ var mylist = document.getElementById("mylist");
       }
 
 
-
-function myFunctio() {
-    document.getElementById("clic").click();
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+    
 }
+
 function a(){
   audio.src = "beat3.wav";
-  div1.innerHTML = "changed preset beat3 "
+  div1.innerHTML = "changed beat3 "
+   audio.play();
 }
 function b(){
   audio.src ="beat2.wav" ;
- div1.innerHTML = "changed preset beat2 "
+ div1.innerHTML = "changed  beat2 "
+  audio.play();
+}
+function c(){
+  audio.src ="" ;
+
 }
 
 
+ var div1 = document.getElementById("div1");
+ div1.innerHTML = "Preset "
 
 
-    var div1 = document.getElementById("div1");
-    div1.innerHTML = "Loaded content for section "
-
-////////////////////////////////////////
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
- 
 </script>
 
 
@@ -577,95 +630,89 @@ window.onclick = function(event) {
  var vis_knob1 = document.getElementById('vis-knob1');
     vis_knob1.addEventListener("change", knob, false);
 
-    function knob(eve) {
-                var str= 0;
-  str= eve.target.value 
-          audio.playbackRate = str/100;
-           div1.innerHTML = audio.playbackRate;
-    }
+    function knob(eve)   {
+         var str= 0;
+             str= eve.target.value 
+            audio.playbackRate = str/100;
+            div1.innerHTML = audio.playbackRate;
+                         }
 
 
  var vis_knob2 = document.getElementById('vis-knob2');
-    vis_knob2.addEventListener("change", visKnob2, false);
+     vis_knob2.addEventListener("change", visKnob2, false);
 
     function visKnob2() {
     
             audio.volume = vis_knob2.value / 200;
-    }
+       }
 
 
 </script>
 
+
+
+<!-- drum melody  -->
+
 <script>
-    var startButton = document.querySelector('.start'),
-        stopButton = document.querySelector('.stop'),
-        freqSlider = document.querySelector(".freq-slider"),
-        detuneSlider = document.querySelector('.detune-slider'),
-        gainSlider = document.querySelector('.gain-slider'),
 
-        freqDisplay = document.querySelector('.freq'),
-        freqDisplay1 = document.querySelector('.freq1');
-    // load our default value
+    var audioContext = new AudioContext();
+
+
     init();
-    // setup start/stop
-    startButton.onclick = start;
-    stopButton.onclick = stop;
-    // setup waveform chan
+  
     function init() {
-        audioContext = new(window.AudioContext)();
-        amp = audioContext.createGain();
+     
+        amp2 = audioContext.createGain();
         lowpass = audioContext.createBiquadFilter();
-        osc = audioContext.createOscillator();
-        osc.type = 'sawtooth';
-        osc.frequency.value = 315;
-        lowpass.frequency.value = 200;
+        osc2 = audioContext.createOscillator();
+        osc2.type = 'sawtooth';
+        osc2.frequency.value = 15;
+        lowpass.frequency.value = 1200;
+        amp2.gain.value = 0.1;
 
-        osc.connect(lowpass);
-        lowpass.connect(amp);
+        osc2.connect(lowpass);
+        lowpass.connect(amp2);
+         
+        osc2.start(0);
 
-        osc.start(0);
+   var switch1 = document.getElementById('switch1');
+        switch1.addEventListener("change", switch_one, false);
 
-        function ddd(e) {
+        function switch_one(e) {
 
             if (e.target.value == "1") {
-                amp.connect(audioContext.destination);
+                amp2.connect(audioContext.destination);
             }
             if (e.target.value == "0") {
-                amp.disconnect(audioContext.destination);
+                amp2.disconnect(audioContext.destination);
             }
 
         }
 
 
 
-        var switch3 = document.getElementById('switch3');
-        switch3.addEventListener("change", ddd, false);
 
-        function sin(e) {
+    var keyboard= document.getElementById("keyboard");
+    keyboard.addEventListener('change', keydrumf, false);
+    keyboard.addEventListener('note', keydrumf, false);
 
-         if(audio.paused){
-            audio.play();
-            //playbtn.style.background = "url(images/pause.png) no-repeat";
-        } else {
-            audio.pause();
-           // playbtn.style.background = "url(images/play.png) no-repeat";
+    function keydrumf(data) {
+        var str = 0;
+        str = 880 * 4 * Math.pow(2, (data.note[1] - 69) / 12);
+        osc2.frequency.value = str;
+      
+        if (data.note[0] == "1") {
+            amp2.gain.value = 0.7;
+
         }
-        }
-        var switch4 = document.getElementById('switch4');
-        switch4.addEventListener("change", sin, false);
-        freqSlider.oninput = function() {
-                changeFreq(freqSlider.value);
-            }
-            // change frequency
-        function changeFreq(fff) {
-            osc.frequency.value = fff;
-            freqDisplay1.innerHTML = fff + 'Hz';
+        if (data.note[0] == "0") {
+            amp2.gain.value = 0;
         }
 
-        function changeFreq(ff) {
-            osc.frequency.value = ff;
-            freqDisplay.innerHTML = ff + 'Hz';
-        }
+    }
+
+
+       
     }
 </script>
 
@@ -673,69 +720,45 @@ window.onclick = function(event) {
 
 
 <script>
-    var knob1 = document.getElementById('knob1');
+    var knob1 = document.getElementById('dial1');
     knob1.addEventListener("change", knob, false);
-    var slide2 = document.getElementById('slide2');
-    slide2.addEventListener("change", knob, false);
-
+  
     function knob(data) {
         var str = 0;
         str = data.target.value
         lowpass.frequency.value = str;
     }
 
-    var knob2 = document.getElementById('knob2');
+    var knob2 = document.getElementById('dial2');
     knob2.addEventListener("change", knob22, false);
-    var slide3 = document.getElementById('slide3');
-    slide3.addEventListener("change", knob22, false);
+
 
     function knob22(data) {
         var str = 0;
         str = data.target.value
         lowpass.Q.value = str;
     }
-    var knob3 = document.getElementById('knob3');
+    var knob3 = document.getElementById('dial3');
     knob3.addEventListener("change", knob33, false);
-    var slide4 = document.getElementById('slide4');
-    slide4.addEventListener("change", knob33, false);
+
 
     function knob33(data) {
         var str = 0;
         str = data.target.value
-        amp.gain.value = str;
+        osc2.frequency.value = str;
     }
-    var knob4 = document.getElementById('knob4');
+    var knob4 = document.getElementById('dial4');
     knob4.addEventListener("change", knob44, false);
-    var slide1 = document.getElementById('slide1');
-    slide1.addEventListener("change", knob44, false);
+
 
     function knob44(data) {
         var str = 0;
         str = data.target.value
-        osc.frequency.value = str;
+       
+        amp2.gain.value = str;
     }
 
 
-
-
-    var key1 = document.getElementById("key1");
-    key1.addEventListener('change', key11, false);
-    key1.addEventListener('note', key11, false);
-
-    function key11(data) {
-        var str = 0;
-        str = 880 * 4 * Math.pow(2, (data.note[1] - 69) / 12);
-        osc.frequency.value = str;
-        freqDisplay1.innerHTML = str.toFixed(0) + 'Hz'
-        if (data.note[0] == "1") {
-            amp.gain.value = 0.7;
-
-        }
-        if (data.note[0] == "0") {
-            amp.gain.value = 0;
-        }
-
-    }
 </script>
 
 
@@ -889,9 +912,11 @@ window.onclick = function(event) {
 </script>
 
 <div id="myNav" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">close</a>
+    <a class="closebtn" onclick="closeNav()">close</a>
     <div class="overlay-content">
-        <webaudio-keyboard id="key1" value="0" direction="" max="1000" step="1" keys="80" width="1350" height="150" style="display:inline-block;border:3px; margin:0px;" </webaudio-keyboard>
+        <webaudio-keyboard id="keyboard" value="0" direction="" max="1000" step="1" keys="80" width="1350" height="150" style="display:inline-block;border:3px; margin:0px;"> </webaudio-keyboard>
+
+     
 
     </div>
     
